@@ -1,0 +1,478 @@
+/* ==========================================================================
+   1. IMPORTS & CONFIGURATION GENERALE
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&display=swap');
+
+:root {
+    --bg-gradient: linear-gradient(-45deg, #1e1b4b, #2e1065, #701a75, #1e1b4b);
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-pink: #f472b6;
+
+    --actifs-gradient: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+    --passifs-gradient: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05));
+    --produits-gradient: linear-gradient(135deg, rgba(244, 114, 182, 0.1), rgba(244, 114, 182, 0.05));
+    
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --glow-hover: 0 0 20px rgba(59, 130, 246, 0.3);
+
+    --glass: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-hover: rgba(255, 255, 255, 0.2);
+    
+    --smash-btn-gradient: linear-gradient(45deg, #3d0147, #cd3bde);
+    --sidebar-width: 250px;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+}
+
+body {
+    background: var(--bg-gradient); 
+    height: 100vh;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    overflow: hidden; 
+    color: #e2e8f0;
+}
+
+.eh {
+    background: linear-gradient(-45deg, #7f1d1d, #ef4444, #991b1b, #450101);
+    background-size: 400% 400% !important;
+    animation: gradientMove 15s ease infinite;
+}
+
+/* ==========================================================================
+   2. STRUCTURE DE L'APPLICATION (LAYOUT)
+   ========================================================================== */
+.conteneur-application {
+    width: 95%; 
+    height: 90vh;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid var(--glass-border);
+    border-radius: 20px;
+    display: flex;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    animation: bor 1s infinite alternate;
+}
+
+.barre-laterale {
+    width: var(--sidebar-width);
+    background: rgba(0, 0, 0, 0.2);
+    border-right: 1px solid var(--glass-border);
+    padding: 30px 20px;
+    display: flex; 
+    flex-direction: column;
+}
+
+.marque {
+    font-weight: 800; 
+    font-size: 20px;
+    margin-bottom: 40px; 
+    text-align: center;
+    letter-spacing: 1px;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+}
+
+.contenu-principal { 
+    flex: 1; 
+    padding: 40px; 
+    overflow-y: auto; 
+    display: flex;
+    flex-direction: column; 
+    animation: faseIn 0.5s ease;
+}
+
+.contenu-principal::-webkit-scrollbar { 
+    display: none; 
+}
+
+h1 { 
+    font-weight: 800; 
+    font-style: italic; 
+    letter-spacing: -1px; 
+    margin-bottom: 5px; 
+    text-transform: uppercase; 
+}
+
+/* ==========================================================================
+   3. NAVIGATION DETACHEE
+   ========================================================================== */
+.menu-navigation { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+    flex: 1;
+}
+
+.element-navigation {
+    font-size: 15px;
+    background: transparent; 
+    border: none;
+    color: #94a3b8;
+    padding: 12px 16px; 
+    border-radius: 10px;
+    text-align: left; 
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex; 
+    align-items: center; 
+    gap: 12px;
+}
+
+.element-navigation:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: white; 
+    transform: translateX(4px);
+}
+
+.element-navigation.actif {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: white; 
+    box-shadow: inset 4px 0 0 var(--accent-blue);
+}
+
+.bouton-parametres {
+    margin-top: auto; 
+}
+
+.bouton-hamburger {
+    display: none; 
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   4. COMPOSANTS DE SAISIE (FORMULAIRE)
+   ========================================================================== */
+.formulaire-saisie {
+    display: grid; 
+    grid-template-columns: repeat(5, 1fr) auto; 
+    gap: 10px;
+    background: rgba(255,255,255,0.05); 
+    padding: 20px; 
+    border-radius: 15px; 
+    margin-bottom: 30px;
+    border: 1px solid var(--glass-border);
+}
+
+.formulaire-saisie input {
+    width: 100%;
+    background: rgba(0,0,0,0.2); 
+    border: 1px solid var(--glass-border);
+    border-radius: 8px; 
+    padding: 10px; 
+    color: white; 
+    outline: none;
+}
+
+input:focus { 
+    animation: bor 1s infinite alternate;
+}
+
+.bouton-ajouter {
+    border: none; 
+    padding: 12px 25px; 
+    border-radius: 15px;
+    color: white; 
+    font-weight: 700; 
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
+    transition: 0.2s; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+    background: linear-gradient(45deg,#3d0147, #cd3bde, #3d0147, #cd3bde);
+    background-size: 400% 400%;
+    animation: anime 5s ease infinite;
+}
+
+.bouton-ajouter:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 0 20px rgba(255,255,255,0.4); 
+    color: black; 
+}
+
+/* ==========================================================================
+   5. TABLEAU DE DONNÉES
+   ========================================================================== */
+.conteneur-tableau { 
+    background: rgba(0, 0, 0, 0.1); 
+    border-radius: 20px; 
+    border: 1px solid var(--glass-border); 
+    overflow: hidden; 
+    flex: 1;              
+    overflow-y: auto;     
+}
+
+.conteneur-tableau::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+
+th { 
+    padding: 15px; 
+    background: rgba(15, 23, 42, 0.6); 
+    font-size: 11px; 
+    color: rgba(255,255,255,0.5); 
+    text-transform: uppercase; 
+    text-align: left; 
+}
+
+td { 
+    padding: 15px; 
+    border-bottom: 1px solid rgba(255,255,255,0.05); 
+    font-size: 14px; 
+}
+
+tr:hover { 
+    background: rgba(255,255,255,0.05); 
+    cursor: pointer; 
+}
+
+.debit, .credit { 
+    color: #fff; 
+    font-weight: 800; 
+    text-align: right; 
+}
+
+th:last-child, td:last-child {
+    text-align: center;
+    width: 50px;
+}
+
+.bouton-supprimer {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.bouton-supprimer:hover {
+    background: #ef4444;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* ==========================================================================
+   6. BARRE DES TOTAUX FIXE (STICKY BOTTOM)
+   ========================================================================== */
+.barre-totaux {
+    position: sticky;
+    bottom: 0;
+    margin-top: 20px; 
+    display: flex; 
+    justify-content: flex-end; 
+    gap: 40px; 
+    font-size: 18px; 
+    font-weight: 800;
+    padding: 20px; 
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+    z-index: 10;
+}
+
+/* --- États Dynamiques --- */
+.is-balanced {
+    background: rgba(34, 197, 94, 0.15) !important;
+    border-color: #22c55e !important;
+    animation: pulse-green 2s infinite;
+}
+
+.is-balanced:hover {
+     background: rgba(161, 209, 180, 0.333) !important;
+}
+
+.is-unbalanced {
+    background: rgba(239, 68, 68, 0.15) !important;
+    border-color: #ef4444 !important;
+    animation: shake 0.4s linear;
+}
+
+.is-unbalanced:hover {
+     background: rgba(239, 148, 148, 0.15) !important;
+}
+
+/* ==========================================================================
+   7. ANIMATIONS KEYFRAMES
+   ========================================================================== */
+@keyframes faseIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bor {
+    0% { border-color: var(--glass-border); }
+    100% { border-color: rgba(255, 255, 255, 0.321); }
+}
+
+@keyframes anime {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+         
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* ==========================================================================
+   8. RESPONSIVE DESIGN (MOBILE & TABLETTE EXCLUSIF)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .conteneur-application {
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+    }
+
+    .barre-laterale {
+        width: 100%;
+        height: 70px; 
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+        position: relative; 
+        z-index: 1000;
+    }
+
+    .marque {
+        margin-bottom: 0; 
+    }
+
+    .bouton-hamburger {
+        display: block;
+    }
+
+    .menu-navigation {
+        display: none;
+        position: absolute;
+        top: 70px; 
+        left: 0;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid var(--glass-border);
+        padding: 20px;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    .menu-navigation.open {
+        display: flex !important;
+        animation: slideDown 0.3s ease forwards;
+    }
+
+    .element-navigation {
+        justify-content: center; 
+        padding: 15px;
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- FIX DU CONTENU PRINCIPAL SUR MOBILE --- */
+    .contenu-principal {
+        padding: 15px;
+        height: calc(100vh - 70px); /* Bloque l'application à l'écran */
+        overflow: hidden; /* Empêche le conteneur global de déborder */
+    }
+
+    /* --- COMPACTAGE DU FORMULAIRE DE SAISIE --- */
+    .formulaire-saisie {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes d'inputs max pour économiser la hauteur */
+        gap: 8px;
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+    
+    .bouton-ajouter {
+        grid-column: span 2; /* Le bouton prend toute la largeur du bas */
+        justify-content: center;
+        padding: 10px;
+    }
+
+    /* --- LE JOURNAL DEVIENT ENFIN LISIBLE & UTILISABLE --- */
+    .conteneur-tableau {
+        width: 100%;
+        overflow-x: auto; /* Active le scroll horizontal de la table */
+        -webkit-overflow-scrolling: touch;
+        border-radius: 12px;
+        flex: 1; /* Absorbe toute la hauteur dynamique disponible */
+    }
+
+    table {
+        min-width: 650px; /* Force la table comptable à garder une structure propre */
+    }
+
+    th, td {
+        padding: 10px 8px; /* Marges réduites pour voir plus de lignes */
+        font-size: 13px;
+    }
+
+    .dashboard-grid, .settings-grid, .ledger-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-ribbon {
+        flex-direction: column;
+    }
+
+    /* --- BARRE DES TOTAUX FIXÉE ET COMPACTE AU BAS --- */
+    .barre-totaux {
+        position: static; /* Annule le comportement sticky instable */
+        flex-direction: row; /* Reste en ligne pour économiser l'espace vertical */
+        justify-content: space-between; 
+        align-items: center;
+        gap: 10px;
+        font-size: 14px; /* Écrit plus petit pour que tout tienne */
+        padding: 12px 15px;
+        margin-top: 10px;
+        border-radius: 10px;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.98);
+    }
+}

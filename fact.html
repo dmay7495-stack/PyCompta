@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCompta | Factures Fournisseurs</title>
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="fact.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        #zoneImpression { 
+            display: none; 
+        }
+
+        @media print {
+            body * { 
+                visibility: hidden; 
+            }
+            
+            #zoneImpression, 
+            #zoneImpression * { 
+                visibility: visible; 
+            }
+            
+            #zoneImpression {
+                display: block !important;
+                position: absolute; 
+                left: 0; 
+                top: 0; 
+                width: 100%;
+                color: black; 
+                background: white; 
+                padding: 40px;
+                font-family: Arial, sans-serif;
+            }
+            
+            .entete-impression { 
+                border-bottom: 2px solid #333; 
+                padding-bottom: 20px; 
+                margin-bottom: 30px; 
+            }
+            
+            .pied-impression { 
+                margin-top: 50px; 
+                border-top: 1px solid #eee; 
+                padding-top: 20px; 
+                font-size: 12px; 
+                text-align: center; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="chargeurSmash">
+        <div class="logo-smash">
+            <div style="width: 50px; height: 50px; border: 5px solid white; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        </div>
+    </div>
+
+    <div id="zoneImpression">
+        <div class="entete-impression">
+            <h1 style="color: #60a5fa;">FACTURE FOURNISSEUR</h1>
+            <p><strong>NSI Comptabilité OHADA</strong></p>
+            <p>Kinshasa, Gombe</p>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; margin-bottom: 40px;">
+            <div>
+                <h4>Fournisseur :</h4>
+                <p id="impressionFournisseur" style="font-size: 20px; font-weight: bold;"></p>
+            </div>
+            <div>
+                <p>Date : <span id="impressionDate"></span></p>
+                <p>N° Facture : <span id="impressionID"></span></p>
+            </div>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 40px; color: black;">
+            <thead>
+                <tr style="background: #f4f4f4; border: 1px solid #ddd;">
+                    <th style="padding: 10px; border: 1px solid #ddd; color: black;">Description</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; color: black;">Total (HT)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 15px; border: 1px solid #ddd;">Prestations de services / Achats</td>
+                    <td id="impressionMontant" style="padding: 15px; border: 1px solid #ddd; text-align: right;"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="text-align: right;">
+            <h3>TOTAL TTC : <span id="impressionTotal"></span></h3>
+        </div>
+
+        <div class="pied-impression">
+            <p>Document généré par PyCompta Système OHADA - 2026</p>
+        </div>
+    </div>
+
+    <div class="conteneur-app">
+        
+        <aside class="barre-laterale">
+            <div class="marque">Py Compta</div>
+            <button class="bouton-hamburger" id="boutonHamburger">☰</button>
+            
+            <nav class="menu-navigation">
+                <a href="taffe.html" class="lien-navigation"><i class="fas fa-chart-pie"></i> Tableau de bord</a>
+                <a href="Factclient.html" class="lien-navigation"><i class="fas fa-user-tie"></i> Factures Clients</a>
+                <a href="#" class="lien-navigation actif"><i class="fas fa-truck"></i> Fournisseurs</a>
+                <a href="Jour.html" class="lien-navigation"><i class="fas fa-book-open"></i> Journaux</a>
+                <a href="gr.html" class="lien-navigation"><i class="fas fa-layer-group"></i> Grand Livre</a>
+                <a href="balance.html" class="lien-navigation"><i class="fas fa-scale-balanced"></i> Balance</a>
+                <a href="bil.html" class="lien-navigation"><i class="fas fa-landmark"></i> Bilan Annuel</a>
+                <a href="par.html" class="lien-navigation bouton-parametres"><i class="fas fa-gears"></i> Paramètres</a>
+            </nav>
+        </aside>
+
+        <main class="contenu-principal">
+            <div class="entete-flexible">
+                <div>
+                    <h1>Traitement Fournisseurs</h1>
+                    <p style="opacity: 0.5;" class="description">Gérez vos décaissements et factures d'achat</p>
+                </div>
+                <div class="depend" style="display: flex; gap: 10px;">
+                    <div class="barre-recherche">
+                        <i class="fas fa-search" style="opacity: 0.3;"></i>
+                        <input type="text" id="champRecherche" placeholder="Chercher un fournisseur...">
+                    </div>
+                    <button class="bouton-smash" onclick="ajouterFacture()"><i class="fas fa-plus"></i> Nouveau</button>
+                </div>
+            </div>
+
+            <div class="onglets">
+                <div class="onglet actif" onclick="changerOnglet('nouveau', this)">Nouveaux</div>
+                <div class="onglet" onclick="changerOnglet('enregistre', this)">Enregistrées</div>
+            </div>
+
+            <div class="conteneur-tableau">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Fournisseur</th>
+                            <th>Montant</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableauFactures"></tbody>
+                </table>
+            </div>
+            
+            <div class="section-stock">
+                <button onclick="window.location.href='Fifo.html'" style="margin-top: -70px;">Gérer le stock</button>
+            </div>
+        </main>
+    </div>
+
+    <div id="modalFacture" class="fenetre-modale">
+        <div class="contenu-modal">
+            <i class="fas fa-file-invoice fa-3x" style="color: #60a5fa; margin-bottom: 20px;"></i>
+            <h3>Détails Facture</h3>
+            <div class="info-modal" id="detailsModal"></div>
+
+            <div class="boutons-modal">
+                <button class="bouton-smash" onclick="imprimerFacture()"><i class="fas fa-print"></i> Imprimer</button>
+                <button class="bouton-smash" style="background: rgba(255, 255, 255, 0.1); margin-left: 140px;" onclick="fermerModal()">Fermer</button>
+            </div>
+            <button onclick="modifierFacture()" style="margin-top: 15px; background: transparent; border: none; color: #f472b6; cursor: pointer; font-weight: bold; animation: texte 2s infinite alternate;">
+                <i class="fas fa-edit"></i> Modifier les infos
+            </button>
+        </div>
+    </div>
+    
+    <script src="fact.js"></script>
+</body>
+</html>

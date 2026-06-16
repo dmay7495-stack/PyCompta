@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCompta | Bilan OHADA Officiel</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="bil.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <style>
+        @media print {
+    .barre-laterale, 
+    .bouton-imprimer, 
+    .user-profile { 
+        display: none !important; 
+    }
+    
+    body { 
+        background: white !important; 
+        color: black !important; 
+        overflow: visible !important; 
+        height: auto !important; 
+    }
+    
+    .conteneur-application { 
+        width: 100% !important; 
+        height: auto !important; 
+        border: none !important; 
+        background: transparent !important; 
+        box-shadow: none !important; 
+        display: block !important; 
+        overflow: visible !important; 
+        backdrop-filter: none !important; 
+    }
+    
+    .contenu-principal { 
+        padding: 0 !important; 
+        overflow: visible !important; 
+    }
+    
+    h1, 
+    p, 
+    .entete-colonne, 
+    .tableau-bilan, 
+    td, 
+    .montant, 
+    .montant-passif { 
+        color: black !important; 
+    }
+    
+    .colonne-bilan { 
+        border: 1px solid #000 !important; 
+        background: transparent !important; 
+        page-break-inside: avoid; 
+        margin-bottom: 20px; 
+    }
+    
+    .montant, 
+    .montant-passif { 
+        font-weight: bold; 
+    }
+}
+    </style>
+    <div class="conteneur-application">
+        <aside class="barre-laterale">
+            <div class="logo-marque">PY COMPTA</div>
+            <button class="bouton-hamburger" id="boutonHamburger">☰</button>
+            <nav class="menu-navigation">
+                <a href="taffe.html" class="lien-navigation"><i class="fas fa-chart-pie"></i> Tableau de bord</a>
+                <a href="Factclient.html" class="lien-navigation"><i class="fas fa-user-tie"></i> Factures Clients</a>
+                <a href="fact.html" class="lien-navigation"><i class="fas fa-truck"></i> Fournisseurs</a>
+                <a href="Jour.html" class="lien-navigation"><i class="fas fa-book-open"></i> Journaux</a>
+                <a href="gr.html" class="lien-navigation"><i class="fas fa-layer-group"></i> Grand Livre</a>
+                <a href="balance.html" class="lien-navigation"><i class="fas fa-scale-balanced"></i> Balance</a>
+                <a href="bil.html" class="lien-navigation actif"><i class="fas fa-landmark"></i> Bilan Annuel</a>
+                <a href="par.html" class="lien-navigation bouton-parametres"><i class="fas fa-gears"></i> Paramètres</a>
+            </nav>
+        </aside>
+
+        <main class="contenu-principal" id="corpsPrincipal">
+            <div class="zone-entete">
+                <div>
+                    <h1>Bilan de Clôture</h1>
+                    <p class="sous-titre">Système Normal OHADA</p>
+                </div>
+                <button class="bouton-imprimer" onclick="window.print()">
+                    <i class="fas fa-file-pdf"></i> GÉNÉRER RAPPORT
+                </button>
+            </div>
+
+            <div class="grille-bilan">
+                <div class="colonne-bilan">
+                    <div class="entete-colonne">ACTIF (Emplois)</div>
+                    <table class="tableau-bilan">
+                        <tbody id="corpsActif">
+                            </tbody>
+                        <tfoot>
+                            <tr class="ligne-total">
+                                <td>TOTAL ACTIF</td>
+                                <td class="montant" id="totalActif">0</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="colonne-bilan">
+                    <div class="entete-colonne">PASSIF (Ressources)</div>
+                    <table class="tableau-bilan">
+                        <tbody id="corpsPassif">
+                            </tbody>
+                        <tfoot>
+                            <tr class="ligne-resultat" id="ligneResultat">
+                                <td>RÉSULTAT NET (Bénéfice)</td>
+                                <td class="montant montant-passif" id="valeurResultat">0</td>
+                            </tr>
+                            <tr class="ligne-total">
+                                <td>TOTAL PASSIF</td>
+                                <td class="montant montant-passif" id="totalPassif">0</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="bil.js"></script>
+</body>
+</html>

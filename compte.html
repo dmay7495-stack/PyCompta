@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCompta | Liste des Comptes OHADA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' media='screen' href='compte.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .zone-formulaire {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .champ-saisie {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            outline: none;
+            transition: 0.3s;
+        }
+        .champ-saisie:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
+        .champ-code { width: 120px; }
+        .champ-titre { flex: 1; min-width: 200px; }
+        
+        .bouton-action-form {
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+        .btn-enregistrer {
+            background: #38bdf8;
+            color: #0f172a;
+        }
+        .btn-enregistrer:hover {
+            background: white;
+            box-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+        .btn-annuler {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid var(--glass-border);
+        }
+        .btn-annuler:hover { background: rgba(255, 255, 255, 0.2); }
+
+        /* Alignement des boutons de modification sur la ligne */
+        .liste-comptes li {
+            justify-content: space-between;
+        }
+        .bloc-gauche {
+            display: flex;
+            align-items: center;
+        }
+        .bloc-actions {
+            display: flex;
+            gap: 8px;
+            opacity: 0.3;
+            transition: 0.3s;
+        }
+        .liste-comptes li:hover .bloc-actions {
+            opacity: 1;
+        }
+        .btn-op {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 6px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .liste-comptes li:hover .btn-op { color: #0f172a; } /* Devient sombre quand la ligne passe en blanc */
+        .btn-op.editer:hover { color: #3b82f6 !important; }
+        .btn-op.supprimer:hover { color: #ef4444 !important; }
+    </style>
+</head>
+<body>
+    <div class="barre-superieure">
+        <button onclick="goBack()" class="bouton-retour">
+            <i class="fas fa-arrow-left"></i> RETOUR DASHBOARD
+        </button>
+    </div>
+
+    <div class="conteneur" id="container">
+        <div class="contenu-principal">
+            <div class="actions-entete">
+                <h2>Liste des comptes 2018 OHADA</h2>
+            </div>
+            
+            <div class="zone-formulaire">
+                <input type="text" id="saisieCode" class="champ-saisie champ-code" placeholder="Code (ex: 411)" maxlength="6">
+                <input type="text" id="saisieTitre" class="champ-saisie champ-titre" placeholder="Intitulé du compte (ex: Clients)">
+                <button onclick="enregistrerCompte()" class="bouton-action-form btn-enregistrer" id="btnEnregistrer">
+                    <i class="fas fa-save"></i> Enregistrer
+                </button>
+                <button onclick="annulerModification()" class="bouton-action-form btn-annuler" id="btnAnnuler" style="display: none;">
+                    Annuler
+                </button>
+            </div>
+
+            <ul class="liste-comptes" id="listeComptesDOM"></ul>
+        </div>
+    </div>
+
+    <script src="compte.js"></script>
+</body>
+</html>

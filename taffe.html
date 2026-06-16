@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCompta OHADAx</title>
+    <link rel="stylesheet" href="taffe.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="chargeur-ecran">
+        <div class="logo-chargement">x
+            <img src="logo.png" alt="Logo PyCompta" style="width: 80px; height: 80px; animation: rotation 2s linear infinite;">
+        </div>
+    </div>
+
+    <div id="ecran-accueil">
+        <h1 style="font-weight: 800; margin-bottom: 40px; text-align: center; letter-spacing: 1px; color: white; text-transform: uppercase;">Bienvenue Sur PyCompta</h1>
+    </div>
+    
+    <div id="overlay-transition-theme"></div>
+
+    <div class="conteneur-app">
+        <aside class="barre-laterale">
+            <div class="logo-marque">PY COMPTA</div>
+            <button class="bouton-hamburger" id="boutonHamburger">☰</button>
+            
+            <nav class="menu-navigation">
+                <button class="lien-navigation active" data-tab="dashboard"><i class="fas fa-chart-pie"></i> Tableau de bord</button>
+                <button class="lien-navigation" onclick="window.location.href='Factclient.html'"><i class="fas fa-user-tie"></i> Facture Clients</button>
+                <button class="lien-navigation" onclick="window.location.href='fact.html'"><i class="fas fa-truck"></i> Fournisseurs</button>
+                <button class="lien-navigation" onclick="window.location.href='Jour.html'"><i class="fas fa-book-open"></i> Journaux</button>
+                <button class="lien-navigation" onclick="window.location.href='gr.html'"><i class="fas fa-layer-group"></i> Grand Livre</button>
+                <button class="lien-navigation" onclick="window.location.href='balance.html'"><i class="fas fa-scale-balanced"></i> Balance</button>
+                <button class="lien-navigation" onclick="window.location.href='bil.html'"><i class="fas fa-landmark"></i> Bilan Annuel</button>
+               <button class="lien-navigation bouton-parametres" onclick="window.location.href='par.html'"><i class="fas fa-gears"></i> Paramètres</button>
+        </aside>
+
+        <main class="contenu-principal">
+            <div id="dashboard" class="page-contenu active">
+                <header class="entete-principale">
+                    <div class="titres-entete">
+                        <h1>Logiciel de Comptabilité OHADA</h1>
+                        <p class="sous-titre">Vos indicateurs financiers clés</p>
+                    </div>
+                    <div class="profil-utilisateur" onclick="handleLogout()" title="Se déconnecter">
+                        <span class="nom-utilisateur">May</span>
+                        <div class="avatar-utilisateur"><i class="fas fa-user-tie"></i></div>
+                        <i class="fas fa-sign-out-alt icone-deconnexion"></i>
+                    </div>
+                </header>
+
+                <div class="grille-tableau-bord">
+                    <div class="carte-stat carte-actifs">
+                        <h3>Actifs</h3>
+                        <div class="valeur" id="dash-actifs">0 <small>FC</small></div>
+                    </div>
+                    <div class="carte-stat carte-passifs">
+                        <h3>Passifs</h3>
+                        <div class="valeur" id="dash-passifs">0 <small>FC</small></div>
+                    </div>
+                    <div class="carte-stat carte-produits" id="bran">
+                        <h3>Résultat Net</h3>
+                        <div class="valeur" id="dash-produits">0 <small>FC</small></div>
+                    </div>
+                </div>
+
+                <div class="conteneur-graphique" style="flex: 1; background: rgba(0, 0, 0, 0.2); border-radius: 20px; border: 1px solid var(--glass-border); padding: 20px; position: relative;">
+                    <canvas id="evolutionChart"></canvas>
+                </div>
+
+                <button class="bouton-smash" id="generateBtn">
+                    <i class="fas fa-magic"></i> GÉNÉRER ÉTATS FINANCIERS !
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="taffe.js"></script>
+</body>
+</html>

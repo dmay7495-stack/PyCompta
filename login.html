@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCompta | Connexion Sécurisée</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel='stylesheet' type='text/css' media='screen' href='login.css'>
+</head>
+<body id="corpsPrincipal">
+<div class="carte-connexion" id="carte">
+    <div class="zone-logo" id="logo">PyCompta</div>
+    <p id="messageStatut" style="font-size: 12px; text-transform: uppercase; color: rgb(217, 232, 138); margin-bottom: 30px;">Identification requise</p>
+
+    <div class="groupe-saisie">
+        <input type="text" id="nomUtilisateur" placeholder="Utilisateur">
+        <i class="fas fa-user"></i>
+    </div>
+
+    <div class="groupe-saisie">
+        <input type="password" id="motDePasse" placeholder="Mot de passe">
+        <i class="fas fa-lock"></i>
+    </div>
+
+    <button class="bouton-connexion" id="boutonConnexion" onclick="handleLogin()">SE CONNECTER</button>
+    <a href="sign.html" class="lien-auth">Pas encore de compte ? S'inscrire</a>
+</div>
+</div>
+
+<script src="login.js"></script>
+
+</body>
+</html>

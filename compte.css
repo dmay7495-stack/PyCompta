@@ -1,0 +1,331 @@
+/* ==========================================================================
+   1. IMPORTS & CONFIGURATION GENERALE
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&display=swap');
+
+:root {
+    --bg-gradient: linear-gradient(-45deg, #1e1b4b, #2e1065, #701a75, #1e1b4b);
+    
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-pink: #f472b6;
+    
+    --glass: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-hover: rgba(255, 255, 255, 0.2);
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+}
+
+body {
+    background: var(--bg-gradient);       
+    min-height: 100vh;
+    color: white;
+    padding: 40px;
+}
+
+/* ==========================================================================
+   2. STRUCTURE & MISE EN PAGE (LAYOUT)
+   ========================================================================== */
+.barre-superieure {
+    position: absolute; 
+    top: 20px; 
+    left: 20px; 
+    z-index: 100;
+}
+
+.contenu-principal {
+    animation: faseIn 1s ease;
+}
+
+.conteneur {
+    max-width: 1200px; 
+    margin: 60px auto 0; 
+    background: var(--glass); 
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border); 
+    border-radius: 24px;
+    padding: 40px; 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    transition: 0.6s;
+    animation: bor 1s infinite alternate;
+}
+
+.actions-entete { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 30px; 
+    border-bottom: 1px solid var(--glass-border); 
+    padding-bottom: 15px;
+}
+
+/* ==========================================================================
+   3. BOUTON RETOUR
+   ========================================================================== */
+.bouton-retour {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.bouton-retour:hover {
+    background: white;
+    color: black;
+    transform: translateX(-5px);
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+}
+
+/* ==========================================================================
+   4. MENU FORMULAIRE (AJOUT / MODIFICATION)
+   ========================================================================== */
+.zone-formulaire {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.champ-saisie {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    outline: none;
+    transition: 0.3s;
+}
+
+.champ-saisie:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+.champ-code { 
+    width: 120px; 
+}
+
+.champ-titre { 
+    flex: 1; 
+    min-width: 200px; 
+}
+
+.bouton-action-form {
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.btn-enregistrer {
+    background: #38bdf8;
+    color: #0f172a;
+    animation: cli 2s infinite;
+}
+
+.btn-enregistrer:hover {
+    background: white;
+    box-shadow: 0 0 15px rgba(255,255,255,0.3);
+}
+
+.btn-annuler {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid var(--glass-border);
+}
+
+.btn-annuler:hover { 
+    background: rgba(255, 255, 255, 0.2); 
+}
+
+/* ==========================================================================
+   5. LISTE DES COMPTES ET ELEMENTS INTERNES
+   ========================================================================== */
+.liste-comptes {
+    list-style: none;
+    width: 100%;
+    background: rgba(0,0,0,0.2);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.2s;
+}
+
+.liste-comptes li {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.liste-comptes li:last-child {
+    border-bottom: none;
+}
+
+.liste-comptes li:hover {
+    background: rgba(255, 255, 255, 0.1); 
+    color: black !important;
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 10;
+    position: relative;
+    border-radius: 8px;
+}
+
+.bloc-gauche {
+    display: flex;
+    align-items: center;
+}
+
+.code {
+    font-weight: 800;
+    color: #38bdf8;
+    width: 80px; 
+    flex-shrink: 0;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.liste-comptes li:hover .code {
+    color: #1e3a8a; 
+}
+
+.titre {
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   6. ACTIONS DE LIGNE (MODIFIER / SUPPRIMER)
+   ========================================================================== */
+.bloc-actions {
+    display: flex;
+    gap: 8px;
+    opacity: 0.3;
+    transition: 0.3s;
+}
+
+.liste-comptes li:hover .bloc-actions {
+    opacity: 1;
+}
+
+.btn-op {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 6px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.liste-comptes li:hover .btn-op { 
+    color: #0f172a; 
+}
+
+.btn-op.editer:hover { 
+    color: #3b82f6 !important; 
+}
+
+.btn-op.supprimer:hover { 
+    color: #ef4444 !important; 
+}
+
+/* ==========================================================================
+   7. ANIMATIONS KEYFRAMES
+   ========================================================================== */
+   @keyframes cli {
+    0%, 100% { 
+        box-shadow: 0 0 10px rgba(56, 189, 248, 0.2); 
+        background: #38bdf8;
+    }
+    50% { 
+        box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); 
+        background: white;
+    }
+}
+@keyframes bor {
+    0% { 
+        border-color: var(--glass-border); 
+    }
+    100% { 
+        border-color: rgba(255, 255, 255, 0.321); 
+    }
+}
+
+@keyframes faseIn {
+    0% { 
+        opacity: 0; 
+        transform: translateY(-10px); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* ==========================================================================
+   8. OPTIMISATION POUR L'IMPRESSION PDF
+   ========================================================================== */
+@media print { 
+    .barre-superieure,
+    .zone-formulaire,
+    .bloc-actions { 
+        display: none !important; 
+    } 
+    
+    body { 
+        background: white; 
+        color: black; 
+        padding: 0; 
+    }
+    
+    .conteneur { 
+        box-shadow: none; 
+        border: none; 
+        background: transparent; 
+    }
+    
+    .liste-comptes li { 
+        border-bottom: 1px solid #ccc; 
+    }
+    
+    .liste-comptes li:hover { 
+        transform: none; 
+        background: transparent; 
+        color: black !important; 
+        box-shadow: none; 
+    }
+    
+    .code { 
+        color: black; 
+    }
+}

@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+:root {
+    --bg-gradient: linear-gradient(-45deg, #1e1b4b, #2e1065, #701a75, #1e1b4b);
+    
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-pink: #f472b6;
+
+    --actifs-gradient: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+    --passifs-gradient: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05));
+    --produits-gradient: linear-gradient(135deg, rgba(244, 114, 182, 0.1), rgba(244, 114, 182, 0.05));
+    
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --glow-hover: 0 0 20px rgba(59, 130, 246, 0.3);
+
+    --glass: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-hover: rgba(255, 255, 255, 0.2);
+    
+    --smash-btn-gradient: linear-gradient(45deg, #3d0147, #cd3bde);
+    --sidebar-width: 250px;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+}
+
+body {
+    background: var(--bg-gradient);       
+    min-height: 100vh;
+    color: white;
+    padding: 40px;
+}
+
+.conteneur {
+    max-width: 1200px; 
+    margin: 0 auto;
+    background: var(--glass); 
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border); 
+    border-radius: 24px;
+    padding: 40px; 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+}
+
+.actions-entete { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 40px; 
+}
+
+.onglets { 
+    display: flex; 
+    gap: 15px; 
+    margin-bottom: 30px; 
+    border-bottom: 1px solid var(--glass-border); 
+    padding-bottom: 15px; 
+}
+
+.bouton-onglet {
+    background: rgba(255,255,255,0.05); 
+    border: 1px solid var(--glass-border);
+    color: white; 
+    padding: 12px 24px; 
+    border-radius: 12px; 
+    cursor: pointer;
+    font-weight: 600; 
+    transition: 0.3s;
+}
+
+.bouton-onglet:hover {
+    background: white; 
+    color: black; 
+    box-shadow: 0 0 5px white;
+}        
+
+.bouton-onglet.actif { 
+    background: white; 
+    color: black; 
+    box-shadow: var(--actifs-shadow);
+    transform: translateY(-7px); 
+}
+
+.section-rapport { 
+    display: none; 
+}
+
+.section-rapport.actif { 
+    display: block; 
+    animation: fadeIn 0.5s ease; 
+}
+
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 20px; 
+    background: rgba(0,0,0,0.2); 
+    border-radius: 15px; 
+    overflow: hidden; 
+    transition: 0.2s;
+}
+
+th { 
+    background: rgba(255,255,255,0.1); 
+    padding: 15px; 
+    text-align: left; 
+    font-size: 14px; 
+    text-transform: uppercase; 
+}
+
+td { 
+    padding: 15px; 
+    border-bottom: 1px solid rgba(255,255,255,0.05); 
+    font-size: 16px; 
+}
+
+table:hover {
+    background: rgba(255, 255, 255, 0.1); 
+    color: white; 
+    transform: translateY(5px);
+    color: black !important;
+}
+
+.valeur { 
+    text-align: right; 
+    font-weight: 800; 
+}
+
+.ligne-total { 
+    background: rgba(255,255,255,0.05); 
+    font-weight: 800; 
+    color: #38bdf8; 
+}
+
+.resultat-positif { 
+    color: #4ade80; 
+}
+
+.resultat-negatif { 
+    color: #f87171; 
+}
+
+.bouton-imprimer {
+    padding: 12px 25px; 
+    border-radius: 50px; 
+    border: none;
+    background: #60a5fa; 
+    color: white; 
+    font-weight: 800; 
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    transition: 0.2s;
+    animation: anime 1.5s infinite alternate;
+}
+
+@keyframes anime {
+    0% { background: #60a5fa; color: white; }
+    100% { background: #f472b6; color: #333; }
+}
+
+.bouton-imprimer:hover {
+    box-shadow: 0 0 20px #f472b6;
+    color: white !important;
+    transform: translateX(10px);
+}
+
+.bouton-retour {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.bouton-retour:hover {
+    background: white;
+    color: black;
+    transform: translateX(-5px);
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+}

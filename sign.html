@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCompta | Inscription</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel='stylesheet' type='text/css' media='screen' href='sign.css'>
+</head>
+<body id="corpsPrincipal">
+<div class="carte-connexion" id="carte">
+    <div class="zone-logo" id="logo">PyCompta</div>
+    <p id="messageStatut">Création de compte</p>
+
+    <div class="groupe-saisie">
+        <input type="text" id="regNomUtilisateur" placeholder="Nouvel utilisateur">
+        <i class="fas fa-user"></i>
+    </div>
+
+    <div class="groupe-saisie">
+        <input type="password" id="regMotDePasse" placeholder="Mot de passe">
+        <i class="fas fa-lock"></i>
+    </div>
+
+    <div class="groupe-saisie">
+        <input type="password" id="regConfirmMotDePasse" placeholder="Confirmer le mot de passe">
+        <i class="fas fa-check-circle"></i>
+    </div>
+
+    <button class="bouton-connexion" id="boutonInscription" onclick="handleRegister()">S'INSCRIRE</button>
+    
+    <a href="login.html" class="lien-auth">Déjà un compte ? Se connecter</a>
+</div>
+
+<script src="sign.js"></script>
+</body>
+</html>

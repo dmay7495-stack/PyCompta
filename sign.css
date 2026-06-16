@@ -1,0 +1,184 @@
+:root {
+            --bg-gradient: linear-gradient(-45deg, #1e1b4b, #2e1065, #701a75, #1e1b4b);
+            --bg-error: linear-gradient(-45deg, #450a0a, #7f1d1d, #450a0a);
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --error-color: #ff4d4d;
+            --glass: rgba(15, 23, 42, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --btn-gradient: linear-gradient(45deg, #3d0147, #cd3bde, #3d0147);
+        }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+        }
+        body {
+            background: var(--bg-gradient); 
+            height: 100vh;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            overflow: hidden; 
+            color: #e2e8f0;
+            position: relative;
+            transition: background 0.8s ease;
+        }
+        body.error-mode {
+            background: var(--bg-error);
+            background-size: 400% 400%;
+        }
+
+        /* --- CARTE DE CONNEXION --- */
+        .carte-connexion {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            width: 100%;
+            max-width: 420px; 
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1; 
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            animation: cardBreathe 6s infinite ease-in-out;
+        }
+        .zone-logo {
+            font-size: 38px;
+            font-weight: 800;
+            font-style: italic;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            letter-spacing: -1px;
+            color: white;
+        }
+        #messageStatut {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #d9e88a;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        /* --- FORMULAIRE ET CHAMPS SÉLECTIONNÉS --- */
+        .groupe-saisie { 
+            position: relative; 
+            margin-bottom: 25px; 
+            text-align: left; 
+        }
+        input {
+            width: 100%; 
+            padding: 16px 16px 16px 48px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px; 
+            color: white; 
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+            transition: color 0.3s;
+        }
+        .groupe-saisie i {
+            position: absolute; 
+            left: 18px; 
+            top: 50%; 
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.4); 
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+        
+        /* États au Focus */
+        input:focus {
+            border-color: var(--accent-purple);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
+            transform: translateY(-2px);
+        }
+        input:focus + i { 
+            color: var(--accent-purple); 
+        }
+        
+        /* Gestion des Erreurs */
+        input.input-error {
+            border-color: var(--error-color) !important;
+            background: rgba(255, 77, 77, 0.08);
+            box-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
+        }
+        input.input-error + i { color: var(--error-color); }
+        input.input-error::placeholder { color: rgba(255, 77, 77, 0.6); }
+        
+        .bouton-connexion {
+            width: 100%; 
+            padding: 18px; 
+            margin-top: 10px;
+            background: var(--btn-gradient);
+            background-size: 300% 300%;
+            border: none; 
+            border-radius: 14px; 
+            color: white;
+            font-size: 15px;
+            letter-spacing: 1px;
+            font-weight: 800; 
+            cursor: pointer; 
+            transition: all 0.3s ease;
+            animation: gradientMove 4s infinite ease-in-out;
+            box-shadow: 0 8px 25px rgba(205, 59, 222, 0.3);
+        }
+        .bouton-connexion:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(205, 59, 222, 0.5);
+            color: #fff;
+        }
+        .bouton-connexion:active {
+            transform: translateY(1px);
+        }
+        .bouton-connexion.btn-error {
+            background: linear-gradient(45deg, #450a0a, #ff4d4d, #450a0a);
+            background-size: 300% 300%;
+            box-shadow: 0 8px 25px rgba(255, 77, 77, 0.4);
+            animation: gradientMove 4s infinite ease-in-out;
+        }
+        .bouton-connexion.btn-error:hover {
+            box-shadow: 0 12px 30px rgba(255, 77, 77, 0.6);
+        }
+
+        /* --- LIENS DE NAVIGATION --- */
+        .lien-auth {
+            display: inline-block;
+            margin-top: 25px;
+            font-size: 13px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .lien-auth:hover {
+            color: var(--accent-purple);
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes cardBreathe {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }

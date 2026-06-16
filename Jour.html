@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCompta | Journal OHADA Premium</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='jour.css'>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @media print{
+            body{
+                visibility: hidden;
+            }
+            h1{
+                visibility: visible;
+            }
+            .conteneur-tableau { 
+                visibility: visible;
+                background: rgba(0, 0, 0, 0.1);    
+                overflow: hidden; 
+            }
+            .barre-totaux{
+                visibility: visible;
+                display: flex;
+                color: black;
+            }
+            button {
+                visibility: hidden;
+            }
+            .colonne-action{
+                visibility: hidden;
+            }
+            table { width: 100%;
+                 border-collapse: collapse; }
+            th { padding: 15px; 
+                background: rgba(255,255,255,0.05); 
+                font-size: 11px;
+                text-transform: uppercase;
+                text-align: left; }
+            td { padding: 15px; 
+                border-bottom: 1px solid rgba(255,255,255,0.05)
+                ; font-size: 14px; }
+        }
+    </style>
+</head>
+<body id="le">
+    <div class="conteneur-application">
+        <aside class="barre-laterale">
+            <div class="marque">Py Compta</div>
+            <button class="bouton-hamburger" id="hamburgerBtn">
+                       ☰ 
+            </button>
+            <nav class="menu-navigation">
+                 <a href="taffe.html" class="element-navigation"><i class="fas fa-chart-pie"></i> Tableau de bord</a>
+                <a href="Factclient.html" class="element-navigation"><i class="fas fa-user-tie"></i> Factures Clients</a>
+                <a href="fact.html" class="element-navigation"><i class="fas fa-truck"></i> Fournisseurs</a>
+                <a href="Jour.html" class="element-navigation actif"><i class="fas fa-book-open"></i> Journaux</a>
+                <a href="gr.html" class="element-navigation"><i class="fas fa-layer-group"></i> Grand Livre</a>
+                <a href="balance.html" class="element-navigation"><i class="fas fa-scale-balanced"></i> Balance</a>
+                <a href="bil.html" class="element-navigation">  <i class="fas fa-landmark"></i> Bilan Annuel</a>
+                <a href="par.html" class="element-navigation bouton-parametres"><i class="fas fa-gears"></i> Paramètres</a>
+            </nav>
+        </aside>
+
+        <main class="contenu-principal">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <div>
+                    <h1>Journal Général</h1>
+                    <p style="opacity: 0.5;">Saisie des opérations</p>
+                </div>
+                <button class="bouton-ajouter" onclick="window.print()"><i class="fas fa-download"></i> Exporter PDF</button>
+            </div>
+
+            <div class="formulaire-saisie">
+                <input type="date" id="dateInput">
+                <input list="planComptable" id="accountInput" placeholder="N° Compte">
+                <input type="text" id="labelInput" placeholder="Libellé">
+                <input type="number" id="debitInput" placeholder="Débit">
+                <input type="number" id="creditInput" placeholder="Crédit">
+                <button class="bouton-ajouter" onclick="addEntry()">Ajouter</button>
+            </div>
+
+            <datalist id="planComptable">
+                <option value="10">10 - Capital</option>
+                <option value="101">101 - Capital social</option>
+                <option value="11">11 - Réserves</option>
+                <option value="12">12 - Report à nouveau</option>
+                <option value="13">13 - Résultat net de l'exercice</option>
+                <option value="131">131 - Résultat net de l'exercice Bénéfices</option>
+                <option value="139">139 - Résultat net de l'exercice Perte</option>
+                <option value="14">14 - Subventions d'investissement</option>
+                <option value="15">15 - Provisions réglementées et fonds assimilés</option>
+                <option value="16">16 - Emprunts et dettes assimilées</option>
+                <option value="162">162 - Emprunts et dettes auprès des établissements de crédit</option>
+                <option value="17">17 - Dettes de crédit - bail et contrats assimilés</option>
+                <option value="18">18 - Dettes liées à des participations et comptes de liaison des établissements et sociétés en participation</option>
+                <option value="19">19 - Provisions financières pour risques et charges</option>
+                <option value="20">20 - Charges immobilisées</option>
+                <option value="21">21 - Immobilisations incorporelles</option>
+                <option value="211">211 - Frais de recherche et de développement</option>
+                <option value="22">22 - Terrains</option>
+                <option value="221">221 - Terrains agricoles et forestiers</option>
+                <option value="23">23 - Bâtiments, installations techniques et agencements</option>
+                <option value="24">24 - Matériel</option>
+                <option value="241">241 - Matériel et outillage industriel et commercial</option>
+                <option value="244">244 - Matériel et mobilier</option>
+                <option value="25">25 - Avances et acomptes versés sur immobilisations</option>
+                <option value="26">26 - Titres de participation</option>
+                <option value="27">27 - Autres immobilisations financières</option>
+                <option value="28">28 - Amortissements</option>
+                <option value="29">29 - Provisions pour dépréciation</option>
+                <option value="31">31 - Marchandises</option>
+                <option value="311">311 - Marchandises a</option>
+                <option value="32">32 - Matières premières et fournitures liées</option>
+                <option value="33">33 - Autres approvisionnements</option>
+                <option value="34">34 - Produits en cours</option>
+                <option value="35">35 - Services en cours</option>
+                <option value="36">36 - Produits finis</option>
+                <option value="37">37 - Produits intermédiaires et résiduels</option>
+                <option value="38">38 - Stocks en cours de route, en consignation ou en dépôt</option>
+                <option value="39">39 - Dépréciations des stocks</option>
+                <option value="40">40 - Fournisseurs et comptes rattachés</option>
+                <option value="401">401 - Fournisseurs, dettes en compte</option>
+                <option value="41">41 - Clients et comptes rattachés</option>
+                <option value="411">411 - Clients</option>
+                <option value="42">42 - Personnel</option>
+                <option value="43">43 - Organismes sociaux</option>
+                <option value="44">44 - État et collectivités publiques</option>
+                <option value="442">442 - État, autres impôts et taxes</option>
+                <option value="443">443 - État, tva facturée</option>
+                <option value="445">445 - État, tva récupérable</option>
+                <option value="45">45 - Organismes internationaux</option>
+                <option value="46">46 - Associés-groupe</option>
+                <option value="47">47 - Débiteurs et créditeurs divers</option>
+                <option value="48">48 - Créances et dettes hors activités ordinaires (h.a.o.)</option>
+                <option value="49">49 - Dépréciations et risques provisionnés (tiers)</option>
+                <option value="50">50 - Titres de placement</option>
+                <option value="51">51 - Valeurs à encaisser</option>
+                <option value="52">52 - Banques</option>
+                <option value="521">521 - Banques locales</option>
+                <option value="53">53 - Établissements financiers et assimilés</option>
+                <option value="54">54 - Instruments de trésorerie</option>
+                <option value="56">56 - Banques, crédits de trésorerie et d'escompte</option>
+                <option value="57">57 - Caisse</option>
+                <option value="571">571 - Caisse siège social</option>
+                <option value="58">58 - Régies d'avances, accréditifs et virements internes</option>
+                <option value="59">59 - Dépréciations et risques provisionnés</option>
+                <option value="60">60 - Achats et variations de stocks</option>
+                <option value="601">601 - Achats de marchandises</option>
+                <option value="61">61 - Transports</option>
+                <option value="611">611 - Transports sur achats</option>
+                <option value="62">62 - Services extérieurs a</option>
+                <option value="63">63 - Services extérieurs b</option>
+                <option value="64">64 - Impôts et taxes</option>
+                <option value="65">65 - Autres charges</option>
+                <option value="66">66 - Charges de personnel</option>
+                <option value="661">661 - Rémunérations directes versées au personnel national</option>
+                <option value="67">67 - Frais financiers et charges assimilées</option>
+                <option value="68">68 - Dotations aux amortissements</option>
+                <option value="69">69 - Dotations aux provisions</option>
+                <option value="70">70 - Ventes</option>
+                <option value="701">701 - Ventes de marchandises</option>
+                <option value="702">702 - Ventes de produits finis</option>
+                <option value="707">707 - Produits accessoires</option>
+                <option value="71">71 - Subventions d'exploitation</option>
+                <option value="72">72 - Production immobilisée</option>
+                <option value="73">73 - Variations de stocks de biens et de services produits</option>
+                <option value="75">75 - Autres produits</option>
+                <option value="77">77 - Revenus financiers et assimilés</option>
+                <option value="78">78 - Transferts de charges</option>
+                <option value="79">79 - Reprises de provisions</option>
+                <option value="81">81 - Valeurs comptables des cessions d'immobilisations</option>
+                <option value="82">82 - Produits des cessions d'immobilisations</option>
+                <option value="83">83 - Charges hors activités ordinaires</option>
+                <option value="84">84 - Produits hors activités ordinaires</option>
+                <option value="85">85 - Dotations hors activités ordinaires</option>
+                <option value="86">86 - Reprises hors activités ordinaires</option>
+                <option value="87">87 - Participation des travailleurs</option>
+                <option value="88">88 - Subventions d'équilibre</option>
+                <option value="89">89 - Impôts sur le résultat</option>
+                <option value="90">90 - Engagements obtenus et engagements accordés</option>
+                <option value="91">91 - Contreparties des engagements</option>
+                <option value="92">92 - Comptes réfléchis</option>
+                <option value="93">93 - Comptes de reclassements</option>
+                <option value="94">94 - Comptes de coûts</option>
+                <option value="95">95 - Comptes de stocks</option>
+                <option value="96">96 - Comptes d'écarts sur coûts préétablis</option>
+                <option value="97">97 - Comptes de différences de traitement comptable</option>
+                <option value="98">98 - Comptes de résultats</option>
+                <option value="99">99 - Comptes de liaisons internes</option>
+            </datalist>
+
+            <div class="conteneur-tableau">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Compte</th>
+                            <th>Libellé</th>
+                            <th style="text-align:right">Débit</th>
+                            <th style="text-align:right">Crédit</th>
+                            <th class="colonne-action">Action</th> 
+                        </tr>
+                    </thead>
+                    <tbody id="journalTable"></tbody>
+                </table>
+            </div>
+
+            <div class="barre-totaux">
+                <div>Total Débit: <span id="totalDebit" style="color: #fff;">0</span></div>
+                <div>Total Crédit: <span id="totalCredit" style="color: #fff;">0</span></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="jour.js"></script>
+</body>
+</html>

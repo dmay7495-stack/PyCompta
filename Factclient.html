@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCompta | Gestion Factures</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='factureclient.css'>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;800&family=Courier+Prime&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .fenetre-modale {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .contenu-modale {
+            background: white;
+            width: 380px;
+            padding: 30px;
+            border-radius: 5px;
+            color: black;
+            font-family: 'Courier Prime', monospace;
+            animation: bor 1s infinite alternate;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .ligne-ticket {
+            border-top: 1px dashed #000;
+            margin: 15px 0;
+        }
+
+        .ligne-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .texte-centre {
+            text-align: center;
+        }
+
+        .montant-total {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .boutons-modale {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            
+            #contenuTicket, 
+            #contenuTicket * {
+                visibility: visible;
+            }
+            
+            #contenuTicket {
+                position: absolute;
+                left: 25%;
+                top: 0;
+                width: 50%;
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+            }
+            
+            .boutons-modale {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="conteneur-app">
+        
+        <aside class="barre-laterale">
+            <div class="logo-marque">
+                Py Compta
+            </div>
+            <button class="bouton-hamburger" id="boutonHamburger">
+                ☰ 
+            </button>
+            <nav class="menu-navigation">
+                <a href="taffe.html" class="lien-navigation">
+                    <i class="fas fa-chart-pie"></i> 
+                    Tableau de bord
+                </a>
+                <a href="Factclient.html" class="lien-navigation active">
+                    <i class="fas fa-user-tie"></i> 
+                    Factures Clients
+                </a>
+                <a href="fact.html" class="lien-navigation">
+                    <i class="fas fa-truck"></i> 
+                    Fournisseurs
+                </a>
+                <a href="Jour.html" class="lien-navigation">
+                    <i class="fas fa-book-open"></i> 
+                    Journaux
+                </a>
+                <a href="gr.html" class="lien-navigation">
+                    <i class="fas fa-layer-group"></i> 
+                    Grand Livre
+                </a>
+                <a href="balance.html" class="lien-navigation">
+                    <i class="fas fa-scale-balanced"></i> 
+                    Balance
+                </a>
+                <a href="bil.html" class="lien-navigation">
+                    <i class="fas fa-landmark"></i> 
+                    Bilan Annuel
+                </a>
+                <a href="par.html" class="lien-navigation bouton-parametres">
+                    <i class="fas fa-gears"></i> 
+                    Paramètres
+                </a>
+            </nav>
+        </aside>
+
+        <main class="contenu-principal">
+            <div class="actions-entete">
+                <h1>Factures Clients</h1>
+                
+                <div style="display: flex; gap: 15px;">
+                    <div class="zone-recherche">
+                        <i class="fas fa-search" style="color: rgba(255, 255, 255, 0.4);"></i>
+                        <input type="text" id="champRecherche" placeholder="Rechercher un client...">
+                    </div>
+                    <button class="bouton-ajouter" onclick="ajouterFacture()">
+                        + Nouvelle Facture
+                    </button>
+                </div>
+            </div>
+
+            <div class="onglets">
+                <div class="onglet active" onclick="changerOnglet('nouveau', this)">
+                    Nouveaux
+                </div>
+                <div class="onglet" onclick="changerOnglet('enregistre', this)">
+                    Enregistrées
+                </div>
+            </div>
+
+            <div class="conteneur-tableau">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>N° Facture</th>
+                            <th>Client</th>
+                            <th>Montant</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableauFactures">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="zone-stock">
+                <button onclick="window.location.href='amort.html'" style="margin-top: -70px;">
+                    Amortissement
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <div id="modaleFacture" class="fenetre-modale">
+        <div class="contenu-modale" id="contenuTicket">
+            
+            <div class="texte-centre">
+                <h2 style="margin-bottom: 5px;">PY COMPTA SHOP</h2>
+                <p>342 Dimbaboma</p>
+                <p>Kinshasa, RDC</p>
+                <p id="dateTicket"></p>
+            </div>
+            
+            <div class="ligne-ticket"></div>
+            
+            <div class="ligne-info">
+                <strong>TICKET:</strong> 
+                <span id="numeroTicket"></span>
+            </div>
+            
+            <div class="ligne-info">
+                <strong>CLIENT:</strong> 
+                <span id="clientTicket"></span>
+            </div>
+            
+            <div class="ligne-ticket"></div>
+            
+            <div id="articlesTicket">
+            </div>
+            
+            <div class="ligne-ticket"></div>
+            
+            <div class="ligne-info montant-total">
+                <span>TOTAL TTC</span>
+                <span id="totalTicket"></span>
+            </div>
+            
+            <div class="ligne-info" style="font-size: 12px; margin-top: 5px;">
+                <span>Dont TVA (18%)</span>
+                <span id="taxeTicket"></span>
+            </div>
+
+            <div class="texte-centre" style="margin-top: 20px; font-size: 12px;">
+                *** Merci de votre confiance ***
+            </div>
+
+            <div class="boutons-modale">
+                <button class="bouton-imprimer" onclick="window.print()">
+                    🖨 IMPRIMER
+                </button>
+                <button class="bouton-fermer" onclick="fermerModale()">
+                    FERMER
+                </button>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script src="factclient.js"></script>
+</body>
+</html>

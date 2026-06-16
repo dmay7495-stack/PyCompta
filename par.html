@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramètres | PyCompta Professional</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="par.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles spécifiques à la page si nécessaire */
+    </style>
+</head>
+<body>
+
+    <div class="conteneur-application">
+        <aside class="barre-laterale">
+    <div class="marque">Py Compta</div>
+    <button class="bouton-hamburger" id="hamburgerBtn">☰</button>
+    <nav class="menu-navigation">
+        <a href="taffe.html" class="element-navigation"><i class="fas fa-chart-pie"></i> Tableau de bord</a>
+        <a href="Factclient.html" class="element-navigation"><i class="fas fa-user-tie"></i> Factures Clients</a>
+        <a href="fact.html" class="element-navigation"><i class="fas fa-truck"></i> Fournisseurs</a>
+        <a href="Jour.html" class="element-navigation"><i class="fas fa-book-open"></i> Journaux</a>
+        <a href="gr.html" class="element-navigation"><i class="fas fa-layer-group"></i> Grand Livre</a>
+        <a href="balance.html" class="element-navigation"><i class="fas fa-scale-balanced"></i> Balance</a>
+        <a href="bil.html" class="element-navigation"><i class="fas fa-landmark"></i> Bilan Annuel</a>
+        <a href="par.html" class="element-navigation actif bouton-parametres"><i class="fas fa-gears"></i> Paramètres</a>
+    </nav>
+</aside>
+
+        <main class="contenu-principal">
+            <div class="zone-entete">
+                <div>
+                    <h1>Paramètres Système</h1>
+                    <p class="sous-titre">Configurez l'identité de votre entreprise</p>
+                </div>
+            </div>
+
+            <div class="grille-parametres">
+                
+                <div class="panneau-parametres">
+                    <h2><i class="fas fa-building"></i> Informations de l'Entreprise</h2>
+                    <form>
+                        <div class="groupe-formulaire">
+                            <label>Dénomination Sociale</label>
+                            <input type="text" id="nomEntreprise" class="champ-formulaire" value="NSI Comptabilité SARL">
+                        </div>
+                        <div class="groupe-formulaire">
+                            <label>Adresse Siège</label>
+                            <input type="text" id="adresseEntreprise" class="champ-formulaire" value="Kinshasa, Gombe">
+                        </div>
+                        <div class="groupe-formulaire">
+                            <label>RCCM</label>
+                            <input type="text" id="rccmEntreprise" class="champ-formulaire" value="CI-ABJ-2023-B-1234">
+                        </div>
+                        <div class="groupe-formulaire">
+                            <label>Devise de Tenue de Compte</label>
+                            <input type="text" class="champ-formulaire" value="Franc Congolais (Fc)" disabled>
+                        </div>
+                        <button type="button" class="bouton-smash" id="btnEnregistrer">
+                            <i class="fas fa-save"></i> Enregistrer
+                        </button>
+                    </form>
+                </div>
+
+                <div class="panneau-parametres">
+                    
+                    <h2><i class="fas fa-user-astronaut"></i> À propos du créateur</h2>
+                    
+                    <div class="carte-profil">
+                        <div class="profil-en-tete">
+                            <div class="avatar-createur">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="infos-createur">
+                                <h3>Brayan May</h3>
+                                <p class="role-createur">Développeur & Étudiant | RDC <i class="fas fa-map-marker-alt"></i></p>
+                            </div>
+                        </div>
+                        
+                        <p class="bio-createur">
+                            Passionné par la création de solutions web interactives et de systèmes de gestion. Toujours en quête de nouveaux défis technologiques pour concevoir des applications performantes et des interfaces modernes.
+                        </p>
+                        <div class="reseaux-createur">
+                            <a href="#" class="lien-reseau github" title="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" class="lien-reseau linkedin" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="lien-reseau twitter" title="Twitter / X"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="lien-reseau portfolio" title="Portfolio"><i class="fas fa-globe"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panneau-parametres">
+                    <h2><i class="fas fa-book-reader"></i> Extrait Plan Comptable OHADA</h2>
+                    <ul class="liste-plan-comptable">
+                        <li><span class="code-compte">101</span> <span class="intitule-compte">Capital Social</span></li>
+                        <li><span class="code-compte">131</span> <span class="intitule-compte">Résultat net Bénéfices</span></li>
+                        <li><span class="code-compte">139</span> <span class="intitule-compte">Résultat net perte</span></li>
+                        <li><span class="code-compte">162</span> <span class="intitule-compte">Emprunts obligataires</span></li>
+                        <li><span class="code-compte">21</span> <span class="intitule-compte">Immobilisation incorporelle</span></li>
+                        <li><span class="code-compte">221</span> <span class="intitule-compte">Terrains</span></li>
+                        <li><span class="code-compte">241</span> <span class="intitule-compte">Matériel Industriel</span></li>
+                        <li><span class="code-compte">244</span> <span class="intitule-compte">Matériel de Transport</span></li>
+                        <li><span class="code-compte">311</span> <span class="intitule-compte">Marchandises</span></li>
+                        <li><span class="code-compte">401</span> <span class="intitule-compte">Fournisseurs</span></li>
+                        <li><span class="code-compte">411</span> <span class="intitule-compte">Clients</span></li>
+                        <li><span class="code-compte">442</span> <span class="intitule-compte">État, impôts retenus</span></li>
+                        <li><span class="code-compte">443</span> <span class="intitule-compte">État, TVA Facturée</span></li>
+                        <li><span class="code-compte">445</span> <span class="intitule-compte">État, TVA Récupérable</span></li>
+                        <li><span class="code-compte">521</span> <span class="intitule-compte">Banque</span></li>
+                        <li><span class="code-compte">571</span> <span class="intitule-compte">Caisse</span></li>
+                        <li><span class="code-compte">601</span> <span class="intitule-compte">Achats de marchandises</span></li>
+                        <li><span class="code-compte">6015</span> <span class="intitule-compte">Frais sur achat</span></li>
+                        <li><span class="code-compte">611</span> <span class="intitule-compte">Transports</span></li>
+                        <li><span class="code-compte">661</span> <span class="intitule-compte">Charges de personnel</span></li>
+                        <li><span class="code-compte">673</span> <span class="intitule-compte">Escompte accordée</span></li>
+                        <li><span class="code-compte">701</span> <span class="intitule-compte">Ventes de marchandises</span></li>
+                        <li><span class="code-compte">707</span> <span class="intitule-compte">Ventes de produits finis</span></li>
+                        <li><span class="code-compte">773</span> <span class="intitule-compte">Escompte obtenue</span></li>
+                    </ul>
+                    <button class="bouton-smash" id="but" onclick="window.location.href='compte.html'">Voir tout le plan comptable</button>
+                </div>
+            </div>
+        </main>
+    </div>  
+    <script src="par.js"></script>
+</body>
+</html>

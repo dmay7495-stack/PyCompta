@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCompta | Gestion de Stock FIFO</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="fifo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="fondu-entree">
+
+<div class="conteneur-stock">
+    <button class="bouton-retour" onclick="window.location.href='fact.html'">
+        <i class="fas fa-arrow-left"></i> RETOUR TABLEAU DE BORD
+    </button>
+
+    <div class="entete-stock">
+        <div>
+            <h1 style="font-size: 35px; font-weight: 800; font-style: italic; letter-spacing: -1px; margin-bottom: 5px; text-transform: uppercase;">Logistique & Stock</h1>
+            <p style="opacity: 0.6;">Méthode FIFO (Premier Entré, Premier Sorti) - Compte 311</p>
+        </div>
+    </div>
+
+    <div class="stats-stock">
+        <div class="carte-stat">
+            <h3>Valeur Totale Stock (311)</h3>
+            <div class="valeur-stat" id="valeurTotale">0 <small>FC</small></div>
+        </div>
+        <div class="carte-stat">
+            <h3>Quantité en Réserve</h3>
+            <div class="valeur-stat" id="quantiteTotale">0 <small>Unités</small></div>
+        </div>
+    </div>
+
+    <div class="grille-actions">
+        <div class="panneau-action">
+            <h2 style="color: var(--success);"><i class="fas fa-plus-circle"></i> Entrée de Marchandises</h2>
+            <div class="groupe-formulaire">
+                <label>Libellé de l'achat</label>
+                <input type="text" id="entreeLibelle" placeholder="Ex: Lot de PC Portable">
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <div class="groupe-formulaire">
+                    <label>Quantité</label>
+                    <input type="number" id="entreeQuantite" value="1" min="1">
+                </div>
+                <div class="groupe-formulaire">
+                    <label>Prix Unitaire (FC)</label>
+                    <input type="number" id="entreePrix" value="1000" min="1">
+                </div>
+            </div>
+            <button class="bouton-action bouton-entree" onclick="traiterEntree()">ENREGISTRER ENTRÉE (DÉBIT 311)</button>
+        </div>
+
+        <div class="panneau-action">
+            <h2 style="color: var(--danger);"><i class="fas fa-minus-circle"></i> Sortie / Vente</h2>
+            <div class="groupe-formulaire">
+                <label>Quantité à sortir</label>
+                <input type="number" id="sortieQuantite" placeholder="0" min="1">
+            </div>
+            <p style="font-size: 11px; opacity: 0.5; margin-bottom: 15px;">
+                * Le coût de sortie sera calculé automatiquement selon les lots les plus anciens (FIFO).
+            </p>
+            <button class="bouton-action bouton-sortie" onclick="traiterSortie()">ENREGISTRER SORTIE (CRÉDIT 311)</button>
+        </div>
+    </div>
+
+    <h3>Détail des Lots en Stock (FIFO)</h3>
+    <div class="conteneur-tableau">
+        <table>
+            <thead>
+                <tr>
+                    <th>LOT ID</th>
+                    <th>DATE ENTRÉE</th>
+                    <th>LIBELLÉ</th>
+                    <th>QTÉ RESTANTE</th>
+                    <th>P.U ACHAT</th>
+                    <th>VALEUR STOCKÉE</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody id="corpsTableauStock"></tbody>
+        </table>
+    </div>
+</div>
+
+<script src="fifo.js"></script>
+</body>
+</html>

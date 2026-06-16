@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCompta | Amortissements Pro</title>
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="Amort.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        #zoneImpression {
+            display: none;
+            margin-top: 50px;
+            background: white;
+            color: #111;
+            padding: 40px;
+            border-radius: 15px;
+        }
+
+        #zoneImpression table {
+            color: #111;
+        }
+
+        #zoneImpression th, 
+        #zoneImpression td {
+            border: 1px solid #ddd;
+            color: #111;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #zoneImpression, 
+            #zoneImpression * {
+                visibility: visible;
+            }
+
+            #zoneImpression {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%; /* Ajusté à 100% pour une meilleure marge d'impression */
+                box-shadow: none;
+                padding: 0; /* Retire le padding pour l'impression papier */
+            }
+
+            .bouton-imprimer-pdf {
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="conteneur">
+    <header class="en-tete">
+        <div>
+            <h1>Gestion des Amortissements</h1>
+        </div>
+        <button class="bouton-action" onclick="window.location.href='Factclient.html'">
+            <i class="fas fa-arrow-left"></i> RETOUR DASHBOARD
+        </button>
+    </header>
+
+    <div class="formulaire-actif">
+        <div class="groupe-champs">
+            <label>Désignation de l'actif</label>
+            <input type="text" id="nomActif" class="champ-saisie" placeholder="Ex: Matériel de Transport">
+        </div>
+        
+        <div class="groupe-champs">
+            <label>Valeur d'Acquisition (FC)</label>
+            <input type="number" id="valeurActif" class="champ-saisie" placeholder="5 000 000">
+        </div>
+        
+        <div class="groupe-champs">
+            <label>Durée de vie (Ans)</label>
+            <input type="number" id="dureeActif" class="champ-saisie" value="5">
+        </div>
+        
+        <div class="groupe-champs">
+            <label>Mise en service</label>
+            <input type="date" id="dateActif" class="champ-saisie">
+        </div>
+        
+        <button class="bouton-smash" onclick="ajouterActif()">
+            <i class="fas fa-plus-circle"></i> AJOUTER AUX IMMOBILISATIONS
+        </button>
+    </div>
+
+    <div class="table-responsive" style="background: rgba(0, 0, 0, 0.1); border-radius: 20px; padding: 20px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Immobilisation</th>
+                    <th>Valeur Origine</th>
+                    <th>Durée</th>
+                    <th>Date d'entrée</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="corpsTableauActifs"></tbody>
+        </table>
+    </div>
+
+    <div id="zoneImpression">
+        <div class="en-tete-impression">
+            <h2 id="titreFiche">TABLEAU D'AMORTISSEMENT</h2>
+            <button onclick="window.print()" class="bouton-imprimer-pdf">
+                IMPRIMER PDF
+            </button>
+        </div>
+        
+        <div id="infoFiche" class="info-fiche-grid"></div>
+        
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr style="background: #f4f4f4;">
+                        <th>Période</th>
+                        <th>Base Amortissable</th>
+                        <th>Annuité</th>
+                        <th>Amort. Cumulés</th>
+                        <th>Valeur Comptable Nette</th>
+                    </tr>
+                </thead>
+                <tbody id="corpsFiche"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="amort.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,526 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+:root {
+    --bg-gradient: linear-gradient(-45deg, #1e1b4b, #2e1065, #701a75, #1e1b4b);
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-pink: #f472b6;
+    --actifs-gradient: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+    --passifs-gradient: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05));
+    --produits-gradient: linear-gradient(135deg, rgba(244, 114, 182, 0.1), rgba(244, 114, 182, 0.05));
+    --glass: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-hover: rgba(255, 255, 255, 0.2);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --glow-hover: 0 0 20px rgba(59, 130, 246, 0.3);
+    --smash-btn-gradient: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    --smash-btn-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+    --sidebar-width: 250px;
+}
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+}
+body {
+    background: var(--bg-gradient); 
+    height: 100vh;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    overflow: hidden; 
+    color: #e2e8f0;
+}
+h1 { 
+    font-weight: 800; 
+    font-style: italic; 
+    letter-spacing: -1px; 
+    margin-bottom: 5px; 
+    text-transform: uppercase;
+}
+
+/* ----------------------------------------------------
+   ÉCRAN D'ACCUEIL & CHARGEURS
+------------------------------------------------------- */
+#ecran-accueil {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-gradient); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: #fff;
+    text-align: center;
+    transition: opacity 0.8s ease;
+    padding: 20px;
+    font-size: 30px;
+    animation: bouge 1s ease;
+}
+
+#ecran-accueil.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#chargeur-ecran {
+    position: fixed; 
+    inset: 0; 
+    background: black;
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: flex-end;
+    padding: 40px; 
+    z-index: 9999;
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.4s ease;
+    height: 100%;
+    width: 100%;
+}
+
+#chargeur-ecran.active { 
+    opacity: 1; 
+    background: black;
+    pointer-events: all; 
+}
+
+.logo-chargement { 
+    position: relative; 
+    width: 100px; 
+    height: 100px; 
+}
+
+
+.logo-chargement::after { 
+    content: ""; 
+    position: absolute; 
+    inset: -10px; 
+    border-radius: 50%; 
+    border: 4px solid transparent; 
+    border-top: 4px solid white; 
+    animation: spin 1s linear infinite; 
+}
+
+/* ----------------------------------------------------
+   CONTENEUR PRINCIPAL & BARRE LATÉRALE
+------------------------------------------------------- */
+.conteneur-app {
+    width: 95%; 
+    height: 90vh;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid var(--glass-border);
+    border-radius: 20px;
+    display: flex;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    animation: bor 1s infinite alternate;
+}
+
+.barre-laterale {
+    width: var(--sidebar-width);
+    background: rgba(0, 0, 0, 0.2);
+    border-right: 1px solid var(--glass-border);
+    padding: 30px 20px;
+    display: flex; 
+    flex-direction: column;
+}
+
+.logo-marque {
+    font-weight: 800; 
+    font-size: 20px;
+    margin-bottom: 40px; 
+    text-align: center;
+    letter-spacing: 1px;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+}
+
+.menu-navigation { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
+
+.lien-navigation {
+    font-size: 15px;
+    background: transparent; 
+    border: none;
+    color: #94a3b8;
+    padding: 12px 16px; 
+    border-radius: 10px;
+    text-align: left; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex; 
+    align-items: center; 
+    gap: 12px;
+}
+
+.lien-navigation:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: white; 
+    transform: translateX(4px);
+}
+
+.lien-navigation.active {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: white; 
+    box-shadow: inset 4px 0 0 var(--accent-blue);
+}
+
+.bouton-hamburger {
+    display: none; 
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* ----------------------------------------------------
+   ZONE DE CONTENU (MAIN CONTENT)
+------------------------------------------------------- */
+.contenu-principal {
+    flex: 1; 
+    padding: 40px;
+    display: flex; 
+    flex-direction: column;
+    overflow-y: auto; 
+}
+.entete-principale {
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.sous-titre { 
+    color: #94a3b8; 
+    font-size: 14px; 
+    margin-top: 4px; 
+}
+
+/* Profil Utilisateur */
+.profil-utilisateur {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 6px 15px 6px 6px;
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profil-utilisateur:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--glass-border-hover);
+    animation: bor 1s infinite alternate;
+}
+
+.avatar-utilisateur {
+    width: 36px;
+    height: 36px;
+    background: var(--smash-btn-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+}
+
+.nom-utilisateur { 
+    font-size: 14px; 
+    font-weight: 600; 
+    color: #f8fafc; 
+}
+
+.icone-deconnexion { 
+    font-size: 14px; 
+    color: #64748b; 
+    transition: color 0.3s ease; 
+}
+
+.profil-utilisateur:hover .icone-deconnexion { 
+    color: var(--accent-pink); 
+}
+
+/* Gestion des pages */
+.page-contenu { 
+    display: none; 
+    flex-direction: column; 
+    flex: 1; 
+}
+
+.page-contenu.active { 
+    display: flex; 
+    animation: fadeIn 0.4s ease; 
+}
+
+/* ----------------------------------------------------
+   TABLEAU DE BORD & GRAPHIQUE
+------------------------------------------------------- */
+.grille-tableau-bord {
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px; 
+    margin-bottom: 30px;
+}
+
+.carte-stat {
+    position: relative; 
+    padding: 24px; 
+    border-radius: 16px;
+    color: white; 
+    border: 1px solid var(--glass-border);
+    cursor: pointer; 
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background: var(--glass);
+    overflow: hidden;
+}
+
+.carte-stat:hover {  
+    transform: translateY(-5px); 
+    border-color: var(--accent-blue);
+    box-shadow: var(--glow-hover);
+}
+
+.carte-stat h3 { 
+    font-size: 13px; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    color: #cbd5e1;
+}
+
+.carte-stat .valeur { 
+    font-size: 24px; 
+    font-weight: 800; 
+    margin-top: 10px; 
+}
+
+.carte-actifs { 
+    border-top: 3px solid var(--accent-blue); 
+    background: var(--actifs-gradient); 
+}
+
+.carte-passifs { 
+    border-top: 3px solid var(--accent-purple); 
+    background: var(--passifs-gradient); 
+}
+
+.carte-produits { 
+    border-top: 3px solid var(--accent-pink); 
+    background: var(--produits-gradient); 
+}
+
+.conteneur-graphique {
+    height: 300px;
+    margin-bottom: 20px;
+    padding: auto;
+}
+
+.bouton-smash {
+    z-index: 10;
+    padding: 15px 30px;
+    border-radius: 25px; 
+    border: none;
+    background: var(--smash-btn-gradient); 
+    color: white;
+    font-weight: 700; 
+    font-size: 16px; 
+    cursor: pointer;
+    box-shadow: var(--smash-btn-shadow);
+    transition: 0.3s; 
+    display: inline-flex;
+    align-items: center; 
+    gap: 10px; 
+    align-self: flex-start;
+    animation: pulse 1s infinite alternate;
+}
+
+.bouton-smash:hover {
+    background: linear-gradient(45deg, #7192de, #9904f5) !important;
+    color: black !important;
+}
+.menu-navigation { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+    flex: 1; /* NOUVEAU : Permet au menu de prendre toute la hauteur disponible dans la barre latérale */
+}
+
+.bouton-parametres {
+    margin-top: auto; /* NOUVEAU : Pousse le bouton tout en bas de l'espace disponible, sans jamais déborder ! */
+}
+/* ----------------------------------------------------
+   ANIMATIONS (KEYFRAMES)
+------------------------------------------------------- */
+@keyframes bor {
+    0% { 
+        border-color: var(--glass-border); 
+    }
+    100% { 
+        border-color: rgba(255, 255, 255, 0.32); 
+    }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+@keyframes bouge {
+    0% { 
+        transform: translateY(); 
+    }
+    100% { 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes pulse { 
+    from { 
+        transform: scale(1); 
+    } 
+    to { 
+        transform: scale(1.05); 
+    } 
+}
+
+@keyframes spin { 
+    to { 
+        transform: rotate(360deg); 
+    } 
+}
+/* ----------------------------------------------------
+   MEDIA QUERIES (RESPONSIVE)
+------------------------------------------------------- */
+@media (max-width: 768px) {
+    body {
+        height: auto; 
+        min-height: 100vh;
+        overflow-y: auto; /* Autorise le défilement de la page entière sur mobile */
+    }
+
+    .conteneur-app {
+        flex-direction: column;
+        width: 100%;
+        height: auto; /* CHANGÉ : Permet au conteneur de s'agrandir avec son contenu */
+        min-height: 100vh;
+        border-radius: 0;
+        border: none;
+    }   
+
+    .barre-laterale {
+        width: 100%;
+        height: 70px; 
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+        position: relative; 
+        z-index: 1000;
+    }
+
+    /* 🔥 CORRECTION DU GRAPHIQUE SUR MOBILE */
+    .conteneur-graphique {
+        display: block !important; /* On réaffiche le graphique */
+        flex: none !important;     /* On annule le flex: 1 de l'ordinateur */
+        height: 280px !important;  /* On lui donne une hauteur fixe parfaite pour mobile */
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .logo-marque {
+        margin-bottom: 0; 
+    }
+
+    .bouton-hamburger {
+        display: block;
+    }
+
+    .menu-navigation {
+        display: none; 
+        position: absolute;
+        top: 70px; 
+        left: 0;
+        width: 100%;
+        background: var(--glass);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid var(--glass-border);
+        padding: 20px;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .menu-navigation.open {
+        display: flex;
+        animation: slideDown 0.3s ease forwards;
+    }
+
+    .lien-navigation {
+        justify-content: center; 
+        padding: 15px;
+    }
+
+    /* 🔥 AJUSTEMENT DU BOUTON SMASH SUR MOBILE */
+    .bouton-smash {
+        padding: 15px 25px;
+        font-size: 14px; 
+        margin-top: 10px;
+        margin-bottom: 30px; /* Espace de sécurité pour ne pas coller le bas de l'écran */
+        width: 100%;        /* Prend toute la largeur pour cliquer plus facilement */
+        justify-content: center;
+        align-self: center;
+    }
+
+    .contenu-principal {
+        padding: 20px;
+        overflow-y: visible; /* Laisse le scroll se faire naturellement via le body */
+    }
+    
+    .grille-tableau-bord, 
+    .grille-parametres {
+        grid-template-columns: 1fr; /* Les cartes s'empilent proprement */
+        gap: 16px;
+    }
+
+    @keyframes slideDown {
+        from { 
+            opacity: 0; 
+            transform: translateY(-10px); 
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+    }
+}

@@ -1,0 +1,404 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&display=swap');
+
+:root {
+    /* Fond animé haut de gamme */
+    --bg-gradient: linear-gradient(-45deg, #1e1b4b, #2e1065, #701a75, #1e1b4b);
+    
+    /* Couleurs de thèmes et accents */
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-pink: #f472b6;
+    
+    /* Couleurs Néon pour les soldes du Grand Livre */
+    --neon-blue: #38bdf8;
+    --neon-pink: #f472b6;
+
+    /* Gradients pour les catégories de comptes */
+    --actifs-gradient: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+    --passifs-gradient: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05));
+    --produits-gradient: linear-gradient(135deg, rgba(244, 114, 182, 0.1), rgba(244, 114, 182, 0.05));
+    
+    /* Effets visuels et ombres */
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --glow-hover: 0 0 20px rgba(59, 130, 246, 0.3);
+
+    /* Concept UI "Glassmorphism" */
+    --glass: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-hover: rgba(255, 255, 255, 0.2);
+    
+    --smash-btn-gradient: linear-gradient(45deg, #3d0147, #cd3bde);
+    --sidebar-width: 250px;
+}
+
+/* Réinitialisation de base */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+}
+
+body {
+    background: var(--bg-gradient); 
+    height: 100vh;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    overflow: hidden; 
+    color: #e2e8f0;
+}
+
+/* Structure Principale (Conteneur en Verre) */
+.conteneur-application {
+    width: 95%; 
+    height: 90vh;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid var(--glass-border);
+    border-radius: 20px;
+    display: flex;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    animation: bor 1s infinite alternate;
+}
+
+/* Barre Latérale de Navigation */
+.barre-laterale {
+    width: var(--sidebar-width);
+    background: rgba(0, 0, 0, 0.2);
+    border-right: 1px solid var(--glass-border);
+    padding: 30px 20px;
+    display: flex; 
+    flex-direction: column;
+}
+
+.marque {
+    font-weight: 800; 
+    font-size: 20px;
+    margin-bottom: 40px; 
+    text-align: center;
+    letter-spacing: 1px;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+}
+
+.menu-navigation { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
+
+.element-navigation {
+    font-size: 15px;
+    background: transparent; 
+    border: none;
+    color: #94a3b8;
+    padding: 12px 16px; 
+    border-radius: 10px;
+    text-align: left; 
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex; 
+    align-items: center; 
+    gap: 12px;
+}
+
+.element-navigation:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: white; 
+    transform: translateX(4px);
+}
+
+.element-navigation.actif {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: white; 
+    box-shadow: inset 4px 0 0 var(--accent-blue);
+}
+
+/* Zone du Contenu Central */
+.contenu-principal { 
+    flex: 1; 
+    padding: 40px; 
+    overflow-y: auto; 
+    animation: slideUp 0.6s ease; 
+}
+
+h1 { 
+    font-weight: 800; 
+    font-style: italic; 
+    letter-spacing: -1px; 
+    margin-bottom: 5px; 
+    text-transform: uppercase;
+}
+
+/* Barre de Recherche Dynamique */
+.boite-recherche {
+    background: rgba(0, 0, 0, 0.2); 
+    padding: 10px 20px; 
+    border-radius: 15px; 
+    border: 1px solid var(--glass-border);
+    width: 300px; 
+    display: flex; 
+    align-items: center; 
+}
+
+.boite-recherche input {
+    background: transparent; 
+    border: none; 
+    color: white; 
+    outline: none; 
+    width: 100%;
+}
+
+.boite-recherche:hover,
+.boite-recherche:focus-within {
+    animation: bor 1s infinite alternate;
+}
+
+/* Ruban Supérieur des Indicateurs (Totaux) */
+.ruban-resume { 
+    display: flex; 
+    gap: 20px; 
+    margin-bottom: 30px; 
+}
+
+.carte-resume {
+    flex: 1; 
+    background: rgba(0, 0, 0, 0.2); 
+    padding: 15px; 
+    border-radius: 15px; 
+    border: 1px solid var(--glass-border); 
+    transition: 0.3s;
+}
+
+.carte-resume small { 
+    font-size: 10px; 
+    opacity: 0.6; 
+    text-transform: uppercase; 
+}
+
+.carte-resume div { 
+    font-size: 18px; 
+    font-weight: 800; 
+    margin-top: 5px; 
+}
+
+.carte-resume:hover {
+    transform: translateY(-5px); 
+    border-color: var(--accent-blue);
+    box-shadow: var(--glow-hover);
+    animation: bor2 1s infinite alternate;
+}
+
+/* Grille Principale du Grand Livre (Comptes en T) */
+.grille-grand-livre { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); 
+    gap: 25px; 
+}
+
+.compte-t {
+    background: rgba(0, 0, 0, 0.2); 
+    border: 1px solid var(--glass-border);
+    border-radius: 20px; 
+    overflow: hidden; 
+    backdrop-filter: blur(10px);
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: slideUp 0.6s ease-out backwards;
+}
+
+.compte-t:hover { 
+    transform: translateY(-5px); 
+    border-color: var(--accent-blue);
+    box-shadow: var(--glow-hover);
+}
+
+/* Design Interne du Compte en T */
+.t-header { 
+    background: rgba(255, 255, 255, 0.1); 
+    padding: 15px; 
+    text-align: center; 
+    border-bottom: 2px solid white; 
+}
+
+.t-body { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    min-height: 80px; 
+}
+
+.t-col { 
+    padding: 15px; 
+    border-right: 1px solid var(--glass-border); 
+}
+
+.entry-line { 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 12px; 
+    margin-bottom: 6px; 
+}
+
+/* Pied de page du compte (Totaux et soldes) */
+.solde-footer { 
+    background: rgba(255, 255, 255, 0.05); 
+    padding: 12px 20px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.solde-tag { 
+    padding: 5px 12px; 
+    border-radius: 20px; 
+    font-size: 10px; 
+    font-weight: 800; 
+    text-transform: uppercase; 
+}
+
+.debiteur { 
+    background: var(--neon-blue); 
+    color: #0f172a; 
+}
+
+.crediteur { 
+    background: var(--neon-pink); 
+    color: white; 
+}
+
+/* Boutons d'actions */
+.bouton-smash {
+    background: var(--smash-btn-gradient); 
+    color: white; 
+    border: none; 
+    padding: 12px 20px;
+    border-radius: 30px; 
+    font-weight: 800; 
+    cursor: pointer; 
+    transition: all 0.3s ease;
+}
+
+.bouton-smash:hover {
+    transform: translateY(-3px); 
+    box-shadow: var(--glow-hover);
+    color: black;
+    background: linear-gradient(45deg, #cd3bde, #3d0147);
+}
+
+/* Menu Hamburger Cache Mobile */
+.bouton-hamburger {
+    display: none; 
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+.menu-navigation { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+    flex: 1; 
+}
+.bouton-parametres {
+    margin-top: auto; 
+}
+/* Personnalisation de la Barre de Défilement */
+.contenu-principal::-webkit-scrollbar { width: 8px; background: transparent; }
+.contenu-principal::-webkit-scrollbar-track { background: transparent; } 
+.contenu-principal::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+
+/* Définitions des Animations Keyframes */
+@keyframes bor {
+    0% { border-color: var(--glass-border); }
+    100% { border-color: rgba(255, 255, 255, 0.32); }
+}
+
+@keyframes bor2 {
+    0% { border-color: var(--accent-blue); }
+    100% { border-color: #021a3b; }
+}
+
+@keyframes clign {
+    0% { background: white; color: #333; }
+    100% { background: #333; color: white; }
+}
+
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVE DESIGN (MOBILES & TABLETTES) */
+@media (max-width: 768px) {
+    .conteneur-application {
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+    }
+
+    .barre-laterale {
+        width: 100%;
+        height: 70px; 
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+        position: relative; 
+        z-index: 1000;
+    }
+
+    .marque {
+        margin-bottom: 0; 
+    }
+
+    .bouton-hamburger {
+        display: block;
+    }
+
+    .menu-navigation {
+        display: none; 
+        position: absolute;
+        top: 70px; 
+        left: 0;
+        width: 100%;
+        background: var(--glass);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid var(--glass-border);
+        padding: 20px;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .menu-navigation.open {
+        display: flex;
+        animation: slideUp 0.3s ease forwards;
+    }
+
+    .element-navigation {
+        justify-content: center; 
+        padding: 15px;
+    }
+
+    .contenu-principal {
+        padding: 20px;
+    }
+
+    .grille-grand-livre {
+        grid-template-columns: 1fr;
+    }
+
+    .ruban-resume {
+        flex-direction: column;
+    }
+}

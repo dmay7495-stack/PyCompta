@@ -1,0 +1,570 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+:root {
+    /* Couleurs de fond et dégradés */
+    --bg-gradient: linear-gradient(-45deg, #1e1b4b, #2e1065, #701a75, #1e1b4b);
+    
+    /* Accents colorés */
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-pink: #f472b6;
+    
+    /* Gradients de filtres / catégories */
+    --actifs-gradient: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+    --passifs-gradient: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05));
+    --produits-gradient: linear-gradient(135deg, rgba(244, 114, 182, 0.1), rgba(244, 114, 182, 0.05));
+    
+    /* Ombres et Effets de brillance */
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --glow-hover: 0 0 20px rgba(59, 130, 246, 0.3);
+    
+    /* Effets de Verre (Glassmorphism) */
+    --glass: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-hover: rgba(255, 255, 255, 0.2);
+    
+    /* Boutons thématiques */
+    --smash-btn-gradient: linear-gradient(45deg, #3d0147, #cd3bde);
+    --sidebar-width: 250px;
+}
+
+/* Réinitialisation globale */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+}
+
+body {
+    background: var(--bg-gradient); 
+    height: 100vh;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    overflow: hidden; 
+    color: #e2e8f0;
+}
+
+/* Conteneur principal en mode Glassmorphism */
+.conteneur-app {
+    width: 95%; 
+    height: 90vh;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid var(--glass-border);
+    border-radius: 20px;
+    display: flex;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    animation: bor 1s infinite alternate;
+}
+
+/* Barre latérale de navigation */
+.barre-laterale {
+    width: var(--sidebar-width);
+    background: rgba(0, 0, 0, 0.2);
+    border-right: 1px solid var(--glass-border);
+    padding: 30px 20px;
+    display: flex; 
+    flex-direction: column;
+}
+
+.marque {
+    font-weight: 800; 
+    font-size: 20px;
+    margin-bottom: 40px; 
+    text-align: center;
+    letter-spacing: 1px; 
+    text-transform: uppercase;
+    color: var(--accent-blue);
+}
+
+.menu-navigation { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
+
+.lien-navigation {
+    font-size: 15px;
+    background: transparent; 
+    border: none;
+    color: #94a3b8;
+    padding: 12px 16px; 
+    border-radius: 10px;
+    text-align: left; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex; 
+    text-decoration: none;
+    align-items: center; 
+    gap: 12px;
+}
+
+.lien-navigation:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: white; 
+    transform: translateX(4px);
+}
+
+.lien-navigation.actif {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: white; 
+    box-shadow: inset 4px 0 0 var(--accent-blue);
+}
+
+/* Zone de contenu central */
+.contenu-principal { 
+    flex: 1; 
+    padding: 40px; 
+    overflow-y: hidden; 
+    animation: fadeIn 0.5s ease; 
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+h1 { 
+    font-weight: 800; 
+    font-style: italic; 
+    letter-spacing: -1px; 
+    margin-bottom: 5px; 
+    text-transform: uppercase;
+}
+
+.entete-flexible { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 30px; 
+}
+
+/* Barre de recherche interactive */
+.barre-recherche {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px; 
+    padding: 10px 20px;
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    width: 300px;
+}
+
+.barre-recherche input {
+    background: transparent; 
+    border: none; 
+    color: white; 
+    outline: none; 
+    width: 100%;
+}
+
+.barre-recherche:hover,
+.barre-recherche:focus-within {
+   animation: bor 1s infinite alternate;
+}
+
+@keyframes bor {
+    0% { border-color: var(--glass-border); }
+    100% { border-color: rgba(255, 255, 255, 0.32); }
+}
+
+/* Boutons au style Dynamique / Animé */
+.bouton-smash {
+    background: linear-gradient(135deg, #c084fc, #60a5fa);
+    border: none; 
+    padding: 12px 25px; 
+    border-radius: 15px;
+    color: white; 
+    font-weight: 700; 
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
+    transition: 0.2s; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px;
+    background: linear-gradient(45deg, #3d0147, #cd3bde, #3d0147, #cd3bde);
+    background-size: 400% 400%;
+    animation: anime 5s ease infinite;
+}
+
+@keyframes anime {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.bouton-smash:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 0 25px white; 
+    color: #333;
+}
+
+/* Système d'onglets filtrants */
+.onglets { 
+    display: flex; 
+    gap: 10px; 
+    margin-bottom: 25px; 
+}
+
+.onglet {
+    padding: 10px 20px; 
+    border-radius: 12px;
+    background: var(--actifs-gradient); 
+    cursor: pointer; 
+    transition: 0.3s;
+    font-size: 14px; 
+    font-weight: 600;
+}
+
+.onglet.actif { 
+    background: #4774ab; 
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.3); 
+    color: white; 
+    transform: translateY(-5px);
+}
+
+.onglet:hover { 
+    background: #4774ab; 
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.3); 
+    color: white; 
+}
+
+/* Tableaux de données comptables */
+.conteneur-tableau {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 20px; 
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    text-align: left; 
+}
+
+th { 
+    padding: 18px; 
+    background: rgba(255, 255, 255, 0.05); 
+    font-size: 13px; 
+    color: rgba(255, 255, 255, 0.5); 
+    text-transform: uppercase; 
+}
+
+td { 
+    padding: 18px; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+}
+
+tr:hover { 
+    background: rgba(255, 255, 255, 0.05); 
+    cursor: pointer; 
+}
+
+/* Fenêtres Modales */
+.fenetre-modale {
+    position: fixed; 
+    inset: 0; 
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px); 
+    display: none;
+    justify-content: center; 
+    align-items: center; 
+    z-index: 9999;
+}
+
+.contenu-modal {
+    animation: bor 1s infinite alternate;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    padding: 40px; 
+    border-radius: 24px; 
+    width: 450px;
+    text-align: center; 
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.info-modal { 
+    margin: 20px 0; 
+    font-size: 18px; 
+    line-height: 1.6; 
+}
+
+.boutons-modal { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+    margin-top: 25px; 
+}
+
+
+@keyframes texte {
+    0% { color: #f472b6; }
+    100% { color: #60a5fa; }
+}
+
+/* Zone d'impression masquée par défaut */
+#zoneImpression { 
+    display: none; 
+}
+
+@media print {
+    body * { visibility: hidden; }
+    #zoneImpression, #zoneImpression * { visibility: visible; }
+    #zoneImpression {
+        display: block !important;
+        position: absolute; 
+        left: 0; 
+        top: 0; 
+        width: 100%;
+        color: black; 
+        background: white; 
+        padding: 40px;
+        font-family: Arial, sans-serif;
+    }
+    .entete-impression { border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 30px; }
+    .pied-impression { margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px; font-size: 12px; text-align: center; }
+}
+
+/* Écran de chargement applicatif */
+#chargeurSmash {
+    position: fixed; 
+    inset: 0; 
+    background: black;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    z-index: 10000; 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: 0.4s;
+}
+
+#chargeurSmash.actif { 
+    opacity: 1; 
+    pointer-events: all; 
+}
+
+/* Boutons d'actions et sections annexes */
+.section-stock {
+    margin-top: 220px;
+    display: flex;
+}
+
+.section-stock button {
+    margin-top: 8px; 
+    padding: 15px 30px;
+    border-radius: 25px; 
+    border: none;
+    background: var(--smash-btn-gradient); 
+    color: white;
+    font-weight: 800; 
+    font-style: italic; 
+    font-size: 16px; 
+    cursor: pointer;
+    box-shadow: var(--smash-btn-shadow);
+    transition: 0.3s; 
+    display: inline-flex;
+    align-items: center; 
+    gap: 10px; 
+    align-self: flex-start;
+    animation: pulse 1s infinite alternate;
+    text-transform: uppercase;
+}
+
+.section-stock button:hover {
+     background: linear-gradient(45deg, #cd3bde, #3d0147) !important;
+     color: black !important;
+}
+
+@keyframes pulse { 
+    from { transform: scale(1); } 
+    to { transform: scale(1.05); } 
+}
+
+.bouton-supprimer {
+    transition: 0.5s;
+}
+
+.bouton-supprimer:hover {
+    color: white !important;
+    transform: translateY(-5px);
+}
+
+.bouton-hamburger {
+    display: none; 
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+.menu-navigation { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+    flex: 1; /* NOUVEAU : Permet au menu de prendre toute la hauteur disponible dans la barre latérale */
+}
+
+.bouton-parametres {
+    margin-top: auto; /* NOUVEAU : Pousse le bouton tout en bas de l'espace disponible, sans jamais déborder ! */
+}
+
+/* ==========================================================================
+   MEDIA QUERIES - RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .grille-dashboard { grid-template-columns: repeat(2, 1fr); }
+    .formulaire-saisie { grid-template-columns: repeat(3, 1fr); }
+    .grille-grandlivre { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+}
+
+@media (max-width: 768px) {
+    .conteneur-app {
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+    }
+    p{
+        display: none;
+    }
+    .description{
+        display: none;
+    }
+
+    .barre-laterale {
+        width: 100%;
+        height: 70px; 
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+        position: relative; 
+        z-index: 1000;
+    }
+
+    .marque {
+        margin-bottom: 0; 
+        font-size: 16px;
+    }
+
+    .bouton-hamburger {
+        display: block;
+    }
+
+    .menu-navigation {
+        display: none; 
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--glass);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid var(--glass-border);
+        padding: 20px;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .menu-navigation.ouvert {
+        display: flex !important;
+        z-index: 9999;
+        animation: slideDown 0.3s ease forwards;
+    }
+
+    .lien-navigation {
+        justify-content: center; 
+        padding: 15px;
+        font-size: 15px;
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .contenu-principal {
+        padding: 20px;
+        overflow-y: auto; 
+    }
+
+    .entete-principale {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .barre-recherche {
+        width: 100%;
+    }
+
+    .grille-dashboard, 
+    .grille-grandlivre {
+        grid-template-columns: 1fr;
+    }
+
+    .formulaire-saisie {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .ruban-resume {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .conteneur-tableau {
+        overflow-x: auto; 
+    }
+    .depend {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .barre-totaux {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    h1 { font-size: 22px; }
+    .carte-stat .valeur { font-size: 20px; }
+}
+
+@media (max-width: 480px) {
+    .corps-t { grid-template-columns: 1fr; }
+    .colonne-t {
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+    }
+    .colonne-t:last-child { border-bottom: none; }
+    .pied-solde {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    .profil-utilisateur {
+        width: 100%;
+        justify-content: space-between;
+    }
+    p{
+        display: none;
+    }
+    .description{
+        display: none;
+    }
+}
